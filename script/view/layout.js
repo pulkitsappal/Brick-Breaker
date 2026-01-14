@@ -1,16 +1,14 @@
 import { drawBricks } from "./bricks.js";
-import { collisionDetection } from "./collision.js";
-import { drawScore } from './score.js';
+import { collisionDetection } from "../controller/collision.js";
+import { drawScore } from '../controller/score.js';
+import { canvas, ctx, gameOver } from '../script.js'; 
 
-let canvas = 0;   // initial value before actual value 
-let ctx = 0;      // initial value before actual value
-let x;
-let y;
+
+let x, y;
 let dx = 2;
 let dy = -2;
 const ballRadius = 10;
 
-let intervalID = 0;
 
 const paddleHeight = 10;
 const paddleWidth = 75;
@@ -19,11 +17,21 @@ let paddleX = 0;
 let rightPressed = false;
 let leftPressed = false;
 
-let score = 0;
+
+
+export function endGame() {
+
+    alert('YOU WIN!!!!');
+    clearInterval(intervalID);
+    document.location.reload();
+
+}
+
+
 
 
 export function draw() {
-
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     x += dx;
@@ -41,12 +49,11 @@ export function draw() {
     }
     else if (y + dy > canvas.height - ballRadius) {
         if (x >= paddleX && x <= paddleX + paddleWidth) {
-            dy = -dy
+            dy = -dy;
         }
         else {
             alert("GAME OVER");
-            clearInterval(intervalID);
-            document.location.reload();
+            gameOver();
         }
     }
 
@@ -87,7 +94,7 @@ export function draw() {
     drawPaddle();
     drawBricks();
     collisionDetection(x, y, dy);
-    drawScore(ctx, score);
+    drawScore();
 
 }
 
@@ -96,7 +103,7 @@ export function draw() {
 function drawPaddle() {
 
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);  //x, y, width, height
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -106,7 +113,7 @@ function drawPaddle() {
 function drawBall() {
 
     ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2); // x, y, width, height
+    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
@@ -114,31 +121,19 @@ function drawBall() {
 }
 
 
-class Layout {
+export class Layout {
 
-    constructor(canvas, ctx) {
-        this.canvas = canvas;
-        this.ctx = ctx;
-
-        this.setData();
-    }
-
-    setData() {
-
-        canvas = this.canvas
-        ctx = this.ctx
+    constructor() {
 
         x = canvas.width / 2;
         y = canvas.height - 30;
         paddleX = (canvas.width - paddleWidth) / 2;
 
-        this.startGame();
-    }
+        drawBall();
+        drawPaddle();
+        drawBricks();
+        drawScore();
 
-    startGame() {
-        intervalID = setInterval(draw, 10);
     }
 
 }
-
-export default Layout;

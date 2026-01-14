@@ -1,4 +1,6 @@
-import { brickColumnCount, brickRowCount, brickHeight, brickWidth, bricks } from "./bricks.js";
+import { brickColumnCount, brickRowCount, brickHeight, brickWidth, bricks } from "../view/bricks.js";
+
+export let score = 0;
 
 export function collisionDetection(x, y, dy) {
 
@@ -10,6 +12,7 @@ export function collisionDetection(x, y, dy) {
                 if (x > b.x && x < (b.x + brickWidth) && y > b.y && y < (b.y + brickHeight)) {
                     dy = -dy;
                     b.status = 0;
+                    console.log("score : " + score++);
                 }
             }
 

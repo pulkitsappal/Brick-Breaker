@@ -1,29 +1,51 @@
 <!doctype html>
 <html lang="en-US">
-  <head>
-    <meta charset="utf-8" />
-    <title>Gamedev Canvas Workshop</title>
 
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      canvas {
-        background: #eeeeee;
-        display: block;
-        margin: 50px auto 0 auto;
-      }
-    </style>
+<head>
+  <meta charset="utf-8" />
+  <title>Gamedev Canvas Workshop</title>
 
-  </head>
-  <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
+  <style>
+    
+    .container{
+      display: grid;
+      justify-content: center;
+      grid-template-rows: 480px auto;
+      row-gap: 30px;
+    }
 
-    <button id="runButton">Start Game</button>
-    <button id="pauseButton">Pause Game</button>
-    <button id="resetButton">Reset</button>
+    .buttons{
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      column-count: 3;
+      column-gap: 60px;
+    }
 
-    <script src="./script.js" type="module"></script>
-  </body>
+  </style>
+
+</head>
+
+<body>
+
+
+  <div class="container">
+
+    <canvas id="myCanvas" width="720" height="480" style="border: 1px solid black;"></canvas>
+
+
+
+    <div class="buttons">
+
+      <button id="runButton">Start Game</button>
+      <button id="pauseButton">Pause Game</button>
+      <button id="resetButton">Reset</button>
+
+    </div>
+
+  </div>
+
+
+  <script src="./script/script.js" type="module"></script>
+</body>
+
 </html>

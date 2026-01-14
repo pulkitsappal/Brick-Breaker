@@ -1,12 +1,12 @@
-import { ctx } from './script.js';
+import { ctx } from '../script.js';
 
-export const brickRowCount = 3;
+export const brickRowCount = 5;
 export const brickColumnCount = 5;
-export const brickWidth = 75;
+export const brickWidth = 100;
 export const brickHeight = 20;
 export const brickPadding = 10;
 export const brickOffsetTop = 30;
-export const brickOffsetLeft = 30;
+export const brickOffsetLeft = 90;
 
 
 
